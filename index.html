@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>pop子和pipi美的日常</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+    .container img{
+      height: 100%;
+      width: 100%;
+    }
+    .text {
+      position: absolute;
+      top: 4%;
+      left: 5%;
+      font-size: 30px;
+    }
+    .btn-container {
+      position: absolute;
+      left: 10%;
+      top: 10%;
+    }
+    .btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      border: 2px solid #000;
+      line-height: 50px;
+      text-align: center;
+      font-size: 30px;
+    }
+    .note {
+      position: absolute;
+      text-align: right;
+      right: 5%;
+      top: 30%;
+      font-size: 24px;
+    }
+    #z {
+      top: 10%;
+    }
+    #x {
+      top: 20%;
+    }
+    #c {
+      top: 30%;
+    }
+    #v {
+      top: 40%;
+    }            
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img id="gif" src="./hit1.gif">
+    <img id="bg" src="./bg.gif" alt="">
+    <div class="text">点击zxcv键有惊喜(同键盘)</div>
+    <div class="btn-container">
+      <div class="btn" id="z">Z</div>
+      <div class="btn" id="x">X</div>
+      <div class="btn" id="c">C</div>
+      <div class="btn" id="v">V</div>
+    </div>
+    <div class="note">
+      <div>作者： @社员_HappyPartyTrain</div>
+      <div>如有问题通过该微博联系</div>
+    </div>
+  </div>
+  <audio id="hit" src="./hit.mp3"></audio>
+  <audio id="diu1" src="./2.mp3"></audio>
+  <audio id="diu2" src="./3.mp3"></audio>
+  <audio id="diu3" src="./4.mp3"></audio>
+</body>
+<script>
+  if ('getContext' in document.createElement('canvas')) {
+    HTMLImageElement.prototype.play = function() {
+        if (this.storeCanvas) {
+            // 移除存储的canvas
+            this.storeCanvas.parentElement.removeChild(this.storeCanvas);
+            this.storeCanvas = null;
+            // 透明度还原
+            image.style.opacity = '';
+        }
+        if (this.storeUrl) {
+            this.src = this.storeUrl;    
+        }
+    };
+    HTMLImageElement.prototype.stop = function() {
+        var canvas = document.createElement('canvas');
+        // 尺寸
+        var width = this.width, height = this.height;
+        if (width && height) {
+            // 存储之前的地址
+            if (!this.storeUrl) {
+                this.storeUrl = this.src;
+            }
+            // canvas大小
+            canvas.width = width;
+            canvas.height = height;
+            // 绘制图片帧（第一帧）
+            canvas.getContext('2d').drawImage(this, 0, 0, width, height);
+            // 重置当前图片
+            try {
+                this.src = canvas.toDataURL("image/gif");
+            } catch(e) {
+                // 跨域
+                this.removeAttribute('src');
+                // 载入canvas元素
+                canvas.style.position = 'absolute';
+                // 前面插入图片
+                this.parentElement.insertBefore(canvas, this);
+                // 隐藏原图
+                this.style.opacity = '0';
+                // 存储canvas
+                this.storeCanvas = canvas;
+            }
+        }
+    };
+}
+var gifImg = document.getElementById('gif')
+var audio1 = document.getElementById('hit')
+var audio2 = document.getElementById('diu1')
+var audio3 = document.getElementById('diu2')
+var audio4 = document.getElementById('diu3')
+
+// setInterval(function(){
+//   gifImg.stop()
+//   gifImg.play()
+//   audio1.play()
+// }, 2000)
+document.addEventListener('ready', function(){
+  gifImg.stop()
+})
+document.addEventListener('keypress', function(event){
+  console.log(event)
+  if (event.charCode === 122) {
+    gifImg.stop()
+    gifImg.play()
+    audio1.load()
+    audio1.play()
+  }
+  if (event.charCode === 120) {
+    audio2.load()
+    audio2.play()
+  }
+  if (event.charCode === 99) {
+    audio3.load()
+    audio3.play()
+  }
+  if (event.charCode === 118) {
+    audio4.load()
+    audio4.play()
+  }  
+})
+document.getElementById('z').addEventListener('click', function(){
+    gifImg.stop()
+    gifImg.play()
+    audio1.load()
+    audio1.play()
+})
+document.getElementById('x').addEventListener('click', function(){
+    audio2.load()
+    audio2.play()
+})
+document.getElementById('c').addEventListener('click', function(){
+    audio3.load()
+    audio3.play()
+})
+document.getElementById('v').addEventListener('click', function(){
+    audio4.load()
+    audio4.play()
+})
+</script>
+</html>
